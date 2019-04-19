@@ -25726,6 +25726,8 @@ fabric.Image.filters.BaseFilter.fromObject = function(object, callback) {
     var originalStrokeWidth = options.strokeWidth;
     options.strokeWidth = 0;
 
+    textContent = parsedAttributes['text-transform'] == 'uppercase' ? textContent.toUpperCase() : textContent
+
     var text = new fabric.Text(textContent, options),
         textHeightScaleFactor = text.getScaledHeight() / text.height,
         lineHeightDiff = (text.height + text.strokeWidth) * text.lineHeight - text.height,
@@ -25737,12 +25739,12 @@ fabric.Image.filters.BaseFilter.fromObject = function(object, callback) {
         x/y attributes in SVG correspond to the bottom-left corner of text bounding box
         fabric output by default at top, left.
     */
-    if (parsedAnchor === 'center') {
-      offX = text.getScaledWidth() / 2;
-    }
-    if (parsedAnchor === 'right') {
-      offX = text.getScaledWidth();
-    }
+    // if (parsedAnchor === 'center') {
+    //   offX = text.getScaledWidth() / 2;
+    // }
+    // if (parsedAnchor === 'right') {
+    //   offX = text.getScaledWidth();
+    // }
     text.set({
       left: text.left - offX,
       top: text.top - (textHeight - text.fontSize * (0.07 + text._fontSizeFraction)) / text.lineHeight,
